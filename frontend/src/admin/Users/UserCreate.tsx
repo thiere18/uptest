@@ -6,8 +6,11 @@ import {
   PasswordInput,
   BooleanInput,
   ReferenceInput,
-  SelectInput,SelectField
+  SelectInput, SelectField,
+  O
 } from 'react-admin';
+import { CT_SELECT_I18N } from './UserEdit';
+
 
 export const UserCreate: FC = (props) => (
   <Create {...props}>
@@ -16,9 +19,17 @@ export const UserCreate: FC = (props) => (
       <TextInput source="first_name" />
       <TextInput source="last_name" />
       <PasswordInput source="password" />
-      <TextInput source="role" />
+      {/* <TextInput source="role" /> */}
+      <SelectInput
+        source="role"
+        choices={CT_SELECT_I18N}
+        // translateChoice={false}
+        optionValue="id"
+        optionText="text"
+    />
       <BooleanInput source="is_superuser" />
       <BooleanInput source="is_active" />
+
 
     </SimpleForm>
   </Create>
