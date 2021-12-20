@@ -27,6 +27,7 @@ def upgrade():
         sa.Column("hashed_password", sa.String(100), nullable=False),
         sa.Column("is_active", sa.Boolean, nullable=False),
         sa.Column("is_superuser", sa.Boolean, nullable=False),
+        sa.Column("role", sa.String(100),nullable=False,server_default=sa.text('user'),),
     )
 
 

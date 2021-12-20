@@ -7,6 +7,7 @@ import {
   BooleanField,
   EmailField,
   EditButton,
+  DeleteButton
 } from 'react-admin';
 
 export const UserList: FC = (props) => (
@@ -18,7 +19,10 @@ export const UserList: FC = (props) => (
       <TextField source="last_name" />
       <BooleanField source="is_active" />
       <BooleanField source="is_superuser" />
+      <TextField source="role" />
       <EditButton />
+      <DeleteButton basePath="/users" />
+
     </Datagrid>
   </List>
 );

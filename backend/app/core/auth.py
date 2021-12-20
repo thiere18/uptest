@@ -63,7 +63,7 @@ def sign_up_new_user(db, email: str, password: str):
     user = get_user_by_email(db, email)
     if user:
         return False  # User already exists
-    new_user = create_user(
+    return create_user(
         db,
         schemas.UserCreate(
             email=email,
@@ -72,4 +72,3 @@ def sign_up_new_user(db, email: str, password: str):
             is_superuser=False,
         ),
     )
-    return new_user

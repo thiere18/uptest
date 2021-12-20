@@ -5,6 +5,8 @@ import {
   TextInput,
   PasswordInput,
   BooleanInput,
+  ReferenceInput,
+  SelectInput,SelectField
 } from 'react-admin';
 
 export const UserCreate: FC = (props) => (
@@ -14,8 +16,10 @@ export const UserCreate: FC = (props) => (
       <TextInput source="first_name" />
       <TextInput source="last_name" />
       <PasswordInput source="password" />
+      <TextInput source="role" />
       <BooleanInput source="is_superuser" />
       <BooleanInput source="is_active" />
+
     </SimpleForm>
   </Create>
 );

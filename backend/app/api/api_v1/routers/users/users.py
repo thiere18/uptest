@@ -56,8 +56,7 @@ async def user_details(
     """
     Get any user details
     """
-    user = get_user(db, user_id)
-    return user
+    return get_user(db, user_id)
     # return encoders.jsonable_encoder(
     #     user, skip_defaults=True, exclude_none=True,
     # )

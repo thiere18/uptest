@@ -24,10 +24,7 @@ async def login(
     access_token_expires = timedelta(
         minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES
     )
-    if user.is_superuser:
-        permissions = "admin"
-    else:
-        permissions = "user"
+    permissions = user.role
     access_token = security.create_access_token(
         data={"sub": user.email, "permissions": permissions},
         expires_delta=access_token_expires,
@@ -51,10 +48,7 @@ async def signup(
     access_token_expires = timedelta(
         minutes=security.ACCESS_TOKEN_EXPIRE_MINUTES
     )
-    if user.is_superuser:
-        permissions = "admin"
-    else:
-        permissions = "user"
+    permissions = user.role 
     access_token = security.create_access_token(
         data={"sub": user.email, "permissions": permissions},
         expires_delta=access_token_expires,

@@ -32,6 +32,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         is_active=user.is_active,
         is_superuser=user.is_superuser,
         hashed_password=hashed_password,
+        role=user.role
     )
     db.add(db_user)
     db.commit()

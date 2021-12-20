@@ -29,6 +29,7 @@ export const Admin: FC = () => {
             list={UserList}
             edit={UserEdit}
             create={UserCreate}
+
           />
         ) : null,
       ]}
