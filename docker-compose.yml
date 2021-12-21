@@ -60,11 +60,13 @@ services:
       context: frontend
       dockerfile: Dockerfile
     stdin_open: true
+    # ports:
+    #   - '80:80'
+    #   - '443:443'
     volumes:
       - './frontend:/app:cached'
       - './frontend/node_modules:/app/node_modules:cached'
       - ./frontend/build:/var/www/html
-      - ./nginx/nginx.conf:/etc/nginx/sites-available/default
     environment:
       - NODE_ENV=development
 
