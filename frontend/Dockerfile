@@ -11,18 +11,10 @@ ADD . /app
 RUN yarn  build
 
 RUN apt update -y \
-    && apt install nginx -y \
+    # && apt install nginx -y \
     && apt-get install software-properties-common -y \
     && add-apt-repository ppa:certbot/certbot -y \
     # && apt-get update -y \
-    && apt-get install python-certbot-nginx -y \
-    && apt-get clean
-
-RUN apt update -y \
-    && apt install nginx -y \
-    && apt-get install software-properties-common -y \
-    && add-apt-repository ppa:certbot/certbot -y \
-    && apt-get update -y \
     && apt-get install python-certbot-nginx -y \
     && apt-get clean
 
