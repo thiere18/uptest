@@ -26,12 +26,11 @@ export const UserEdit: FC = (props) => (
       <SelectInput
         source="role"
         choices={CT_SELECT_I18N}
-        // translateChoice={false}
+        translateChoice={false}
         optionValue="id"
         optionText="text"
       />
       <BooleanInput source="is_active" />
-      <BooleanInput source="is_superuser" />
     </SimpleForm>
   </Edit>
 );

@@ -27,7 +27,6 @@ export const UserList: FC = (props) => {
           <TextField source="first_name" />
           <TextField source="last_name" />
           <BooleanField source="is_active" />
-          <BooleanField source="is_superuser" />
           <TextField source="role" />
           {permissions==='admin'&& <EditButton />}
           {permissions === 'admin' && <DeleteButton basePath="/users" /> }

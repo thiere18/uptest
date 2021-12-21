@@ -134,7 +134,6 @@ def test_superuser(test_db) -> models.User:
 def verify_password_mock(first: str, second: str) -> bool:
     return True
 
-
 @pytest.fixture
 def user_token_headers(
     client: TestClient, test_user, test_password, monkeypatch
@@ -148,14 +147,13 @@ def user_token_headers(
     r = client.post("/api/token", data=login_data)
     tokens = r.json()
     a_token = tokens["access_token"]
-    headers = {"Authorization": f"Bearer {a_token}"}
-    return headers
+    return {"Authorization": f"Bearer {a_token}"}
 
 
 @pytest.fixture
 def superuser_token_headers(
     client: TestClient, test_superuser, test_password, monkeypatch
-) -> t.Dict[str, str]:
+) -> t.Dict[str, str]:  # sourcery skip: inline-immediately-returned-variable
     monkeypatch.setattr(security, "verify_password", verify_password_mock)
 
     login_data = {

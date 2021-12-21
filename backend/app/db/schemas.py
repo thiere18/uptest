@@ -6,7 +6,7 @@ class UserBase(BaseModel):
     username: str
     email: str
     is_active: bool = True
-    is_superuser: bool = False
+    # is_superuser: bool = False
     first_name: str = None
     last_name: str = None
     role: t.Optional[str] = "user"

@@ -16,7 +16,7 @@ def init() -> None:
             email="admin@fan.com",
             password="password",
             is_active=True,
-            is_superuser=True,
+            # is_superuser=True,
             role="admin",
         ),
     )

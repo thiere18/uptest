@@ -27,11 +27,11 @@ def get_users(
 
 
 def create_user(db: Session, user: schemas.UserCreate):
-    verify_user_email=db.query(models.User).filter(models.User.email==user.email).first()
-    verify_user_username=db.query(models.User).filter(models.User.username==user.username).first()
-    if verify_user_email:
+    verify_user_email=db.query(models.User).filter(models.User.email==user.email)
+    verify_user_username=db.query(models.User).filter(models.User.username==user.username)
+    if verify_user_email is not None:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='user already exists')
-    if verify_user_username:
+    if verify_user_username is not None:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='username already exists')
 
     hashed_password = get_password_hash(user.password)
@@ -54,7 +54,6 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 def delete_user(db: Session, user_id: int):
     user = get_user(db, user_id)
-    
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="User not found")
     db.delete(user)
@@ -69,10 +68,7 @@ def edit_user(
     if not db_user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="User not found")
     update_data = user.dict(exclude_unset=True)
-    verify_user_username=db.query(models.User).filter(models.User.username==db_user.username).first()
-    verify_email=db.query(models.User).filter(models.User.email==db_user.email).first()
-    if verify_user_username: raise HTTPException(status.HTTP_404_NOT_FOUND, detail="username already in use")
-    if verify_email: raise HTTPException(status.HTTP_409_CONFLICT, detail="email already in use")
+    print(update_data)
     if "password" in update_data:
         update_data["hashed_password"] = get_password_hash(user.password)
         del update_data["password"]
