@@ -9,7 +9,6 @@ import {
 } from 'react-admin';
 export const CT_SELECT_I18N = [
   {id: 'admin', text: 'Admin'},
-  {id: 'user', text: 'User'},
   { id: 'normal', text: 'Normal' },
   {id: 'restricted', text: 'Restricted'},
 
