@@ -12,6 +12,7 @@ def init() -> None:
     create_user(
         db,
         UserCreate(
+            username='admin',
             email="admin@fan.com",
             password="password",
             is_active=True,
@@ -22,6 +23,6 @@ def init() -> None:
 
 
 if __name__ == "__main__":
-    print("Creating superuser admin@fan.com")
+    print("Creating superuser admin@fan.com with admin as username")
     init()
     print("Superuser created")

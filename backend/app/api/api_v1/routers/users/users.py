@@ -23,7 +23,7 @@ users_router = r = APIRouter()
 async def users_list(
     response: Response,
     db=Depends(get_db),
-    current_user=Depends(get_current_active_superuser),
+    current_user=Depends(get_current_active_user),
 ):
     """
     Get all users
@@ -51,7 +51,7 @@ async def user_details(
     request: Request,
     user_id: int,
     db=Depends(get_db),
-    current_user=Depends(get_current_active_superuser),
+    current_user=Depends(get_current_active_user),
 ):
     """
     Get any user details
@@ -67,7 +67,7 @@ async def user_create(
     request: Request,
     user: UserCreate,
     db=Depends(get_db),
-    current_user=Depends(get_current_active_superuser),
+    current_user=Depends(get_current_active_user),
 ):
     """
     Create a new user
@@ -83,7 +83,7 @@ async def user_edit(
     user_id: int,
     user: UserEdit,
     db=Depends(get_db),
-    current_user=Depends(get_current_active_superuser),
+    current_user=Depends(get_current_active_user),
 ):
     """
     Update existing user
@@ -98,7 +98,7 @@ async def user_delete(
     request: Request,
     user_id: int,
     db=Depends(get_db),
-    current_user=Depends(get_current_active_superuser),
+    current_user=Depends(get_current_active_user),
 ):
     """
     Delete existing user

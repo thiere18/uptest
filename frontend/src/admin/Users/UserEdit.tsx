@@ -18,6 +18,7 @@ export const UserEdit: FC = (props) => (
   <Edit {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
+      <TextInput source="username" />
       <TextInput source="email" />
       <TextInput source="first_name" />
       <TextInput source="last_name" />

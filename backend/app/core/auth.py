@@ -3,7 +3,7 @@ from fastapi import Depends, HTTPException, status
 from jwt import PyJWTError
 
 from app.db import models, schemas, session
-from app.db.crud import get_user_by_email, create_user
+from app.db.crud import get_user_by_email, create_user,get_user_by_email_or_username
 from app.core import security
 
 
@@ -50,8 +50,8 @@ async def get_current_active_superuser(
     return current_user
 
 
-def authenticate_user(db, email: str, password: str):
-    user = get_user_by_email(db, email)
+def authenticate_user(db, username: str, password: str):
+    user = get_user_by_email_or_username(db, username ,username)
     if not user:
         return False
     if not security.verify_password(password, user.hashed_password):
@@ -59,13 +59,14 @@ def authenticate_user(db, email: str, password: str):
     return user
 
 
-def sign_up_new_user(db, email: str, password: str):
-    user = get_user_by_email(db, email)
+def sign_up_new_user(db, username:str, email: str, password: str):
+    user = get_user_by_email_or_username(db, username, email)
     if user:
         return False  # User already exists
     return create_user(
         db,
         schemas.UserCreate(
+            username=username,
             email=email,
             password=password,
             is_active=True,

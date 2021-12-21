@@ -16,6 +16,9 @@ def get_user(db: Session, user_id: int):
 def get_user_by_email(db: Session, email: str) -> schemas.UserBase:
     return db.query(models.User).filter(models.User.email == email).first()
 
+def get_user_by_email_or_username(db: Session, username: str,email: str) -> schemas.UserBase:
+    return db.query(models.User).filter((models.User.username == username)|(models.User.email == email)).first()
+
 
 def get_users(
     db: Session, skip: int = 0, limit: int = 100
@@ -24,8 +27,17 @@ def get_users(
 
 
 def create_user(db: Session, user: schemas.UserCreate):
+    verify_user_email=db.query(models.User).filter(models.User.email==user.email).first()
+    verify_user_username=db.query(models.User).filter(models.User.username==user.username).first()
+    if verify_user_email:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='user already exists')
+    if verify_user_username:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='username already exists')
+
     hashed_password = get_password_hash(user.password)
+
     db_user = models.User(
+        username=user.username,
         first_name=user.first_name,
         last_name=user.last_name,
         email=user.email,
@@ -42,6 +54,7 @@ def create_user(db: Session, user: schemas.UserCreate):
 
 def delete_user(db: Session, user_id: int):
     user = get_user(db, user_id)
+    
     if not user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="User not found")
     db.delete(user)
@@ -56,7 +69,10 @@ def edit_user(
     if not db_user:
         raise HTTPException(status.HTTP_404_NOT_FOUND, detail="User not found")
     update_data = user.dict(exclude_unset=True)
-
+    verify_user_username=db.query(models.User).filter(models.User.username==db_user.username).first()
+    verify_email=db.query(models.User).filter(models.User.email==db_user.email).first()
+    if verify_user_username: raise HTTPException(status.HTTP_404_NOT_FOUND, detail="username already in use")
+    if verify_email: raise HTTPException(status.HTTP_409_CONFLICT, detail="email already in use")
     if "password" in update_data:
         update_data["hashed_password"] = get_password_hash(user.password)
         del update_data["password"]

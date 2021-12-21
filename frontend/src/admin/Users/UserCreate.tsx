@@ -15,6 +15,7 @@ import { CT_SELECT_I18N } from './UserEdit';
 export const UserCreate: FC = (props) => (
   <Create {...props}>
     <SimpleForm>
+    <TextInput source="username" />
       <TextInput source="email" />
       <TextInput source="first_name" />
       <TextInput source="last_name" />

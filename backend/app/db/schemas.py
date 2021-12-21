@@ -3,6 +3,7 @@ import typing as t
 
 
 class UserBase(BaseModel):
+    username: str
     email: str
     is_active: bool = True
     is_superuser: bool = False

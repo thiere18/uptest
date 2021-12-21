@@ -22,7 +22,7 @@ const dataProvider = simpleRestProvider('api/v1', httpClient);
 export const Admin: FC = () => {
   return (
     <ReactAdmin dataProvider={dataProvider} authProvider={authProvider}>
-      {(permissions: 'admin' | 'user') => [
+      {(permissions: 'admin' | 'normal'| 'restricted') => [
         permissions === 'admin' ? (
           <Resource
             name="users"
@@ -31,7 +31,13 @@ export const Admin: FC = () => {
             create={UserCreate}
 
           />
-        ) : null,
+        ) :     (   <Resource
+        name="users"
+        list={UserList}
+        // edit={UserEdit}
+        // create={UserCreate}
+
+      />),
       ]}
     </ReactAdmin>
   );
