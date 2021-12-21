@@ -27,12 +27,12 @@ def get_users(
 
 
 def create_user(db: Session, user: schemas.UserCreate):
-    verify_user_email=db.query(models.User).filter(models.User.email==user.email)
-    verify_user_username=db.query(models.User).filter(models.User.username==user.username)
-    if verify_user_email is not None:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='user already exists')
-    if verify_user_username is not None:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='username already exists')
+    # verify_user_email=db.query(models.User).filter(models.User.email==user.email)
+    # verify_user_username=db.query(models.User).filter(models.User.username==user.username)
+    # if verify_user_email is not None:
+    #     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='user already exists')
+    # if verify_user_username is not None:
+    #     raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='username already exists')
 
     hashed_password = get_password_hash(user.password)
 
@@ -42,7 +42,6 @@ def create_user(db: Session, user: schemas.UserCreate):
         last_name=user.last_name,
         email=user.email,
         is_active=user.is_active,
-        is_superuser=user.is_superuser,
         hashed_password=hashed_password,
         role=user.role
     )

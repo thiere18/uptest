@@ -3,9 +3,10 @@ services:
   nginx:
     image: nginx:1.17
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/nginx.conf:/etc/nginx/sites-available/default
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - backend
       - frontend
@@ -60,9 +61,13 @@ services:
       context: frontend
       dockerfile: Dockerfile
     stdin_open: true
+    # ports:
+    #   - '80:80'
+    #   - '443:443'
     volumes:
       - './frontend:/app:cached'
       - './frontend/node_modules:/app/node_modules:cached'
+      - ./frontend/build:/var/www/html
     environment:
       - NODE_ENV=development
 
