@@ -19,6 +19,8 @@ users_router = r = APIRouter()
     "/users",
     response_model=t.List[User],
     response_model_exclude_none=True,
+
+
 )
 async def users_list(
     response: Response,
@@ -31,6 +33,9 @@ async def users_list(
     users = get_users(db)
     # This is necessary for react-admin to work
     response.headers["Content-Range"] = f"0-9/{len(users)}"
+    response.headers['X-Total-Count'] = '30' 
+    response.headers['Access-Control-Expose-Headers'] = 'Content-Range'
+
     return users
 
 

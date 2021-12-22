@@ -4,8 +4,9 @@ from sqlalchemy.orm import sessionmaker
 
 from app.core import config
 
+fo=config.SQLALCHEMY_DATABASE_URI
 engine = create_engine(
-    config.SQLALCHEMY_DATABASE_URI,
+    config.SQLALCHEMY_DATABASE_URI
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
