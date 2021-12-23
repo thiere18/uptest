@@ -48,6 +48,8 @@ docker-compose up -d
 ```
 ## adding ssl certification
 ### backend ssl certification 
+you now gonna connect to your frontend container terminal and add the ssl certification
+
 ```
 docker exec -it <backend_container> bash
 ```
@@ -59,6 +61,7 @@ it will appear an interactive terminal and follow the steps
 
 
 ### frontend ssl certification 
+you now gonna connect to your frontend container terminal and add the ssl certification
 ```
 docker exec -it <frontend_container> bash
 ```
