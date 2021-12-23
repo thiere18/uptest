@@ -1,3 +1,9 @@
+### live demo
+frontend:
+https://cool.thiere18.studio
+
+backend
+https://thiere18.studio/api
 
 ## Development
 
@@ -10,6 +16,7 @@ Starting the project with hot-reloading enabled
 (the first time it will take a while):
 
 Change into your project directory and run:
+## backend deployment
 
 
 ```bash
@@ -26,8 +33,40 @@ Once you've built the images once, you can simply use regular docker-compose com
 docker-compose up -d
 
 ```
-go to nginx/nginx-conf and change your the servername with your domain name or localhost
+go to nginx/nginx-back.conf and change your the servername with your domain name or localhost
 
+## frontend deployment 
+
+inside frontend/src
+search for https://back.thiere.studio and replace it everywhere with your domain
+
+go to nginx/nginx-front.conf and change your the servername with your domain name or localhost
+
+run 
+```
+docker-compose up -d
+```
+## adding ssl certification
+### backend ssl certification 
+```
+docker exec -it <backend_container> bash
+```
+inside run 
+```
+certbot --nginx -d yourdomain.com -d www.yourdomain.com 
+```
+it will appear an interactive terminal and follow the steps
+
+
+### frontend ssl certification 
+```
+docker exec -it <frontend_container> bash
+```
+inside run 
+```
+certbot --nginx -d yourdomain.com -d www.yourdomain.com 
+```
+it will appear an interactive terminal and follow the steps
 
 
 
